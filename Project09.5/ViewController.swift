@@ -26,6 +26,8 @@ class ViewController: UIViewController {
         let interfaceView = UIView()
         interfaceView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(interfaceView)
+        interfaceView.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
+
         
         livesLabel = UILabel()
         livesLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -39,21 +41,20 @@ class ViewController: UIViewController {
         currentAnswer.textAlignment = .center
         currentAnswer.font = UIFont.systemFont(ofSize: 44)
         currentAnswer.isUserInteractionEnabled = false
-        view.addSubview(currentAnswer)
-        currentAnswer.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
+        interfaceView.addSubview(currentAnswer)
         
         let submit = UIButton(type: .system)
         submit.translatesAutoresizingMaskIntoConstraints = false
         submit.setTitle("SUBMIT", for: .normal)
-        view.addSubview(submit)
+        interfaceView.addSubview(submit)
 
         let clear = UIButton(type: .system)
         clear.translatesAutoresizingMaskIntoConstraints = false
         clear.setTitle("CLEAR", for: .normal)
-        view.addSubview(clear)
+        interfaceView.addSubview(clear)
 
 
-
+        
         NSLayoutConstraint.activate([
             livesLabel.topAnchor.constraint(equalTo:
             view.layoutMarginsGuide.topAnchor),
@@ -62,7 +63,7 @@ class ViewController: UIViewController {
 
             currentAnswer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             currentAnswer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            currentAnswer.topAnchor.constraint(equalTo: livesLabel.bottomAnchor),
+            currentAnswer.centerYAnchor.constraint(equalTo: interfaceView.centerYAnchor),
             
             submit.topAnchor.constraint(equalTo: currentAnswer.bottomAnchor),
             submit.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100),
@@ -72,8 +73,12 @@ class ViewController: UIViewController {
             clear.centerYAnchor.constraint(equalTo: submit.centerYAnchor),
             clear.heightAnchor.constraint(equalToConstant: 44),
             
+            interfaceView.widthAnchor.constraint(equalToConstant: 750),
+            interfaceView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            interfaceView.topAnchor.constraint(equalTo: livesLabel.bottomAnchor),
+            
             buttonsView.widthAnchor.constraint(equalToConstant: 750),
-            buttonsView.heightAnchor.constraint(equalToConstant: 320),
+            buttonsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
             buttonsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonsView.topAnchor.constraint(equalTo: submit.bottomAnchor,
             constant: 20),
@@ -84,6 +89,7 @@ class ViewController: UIViewController {
         buttonsView.backgroundColor = .red
         livesLabel.backgroundColor = .gray
         currentAnswer.backgroundColor = .green
+        interfaceView.backgroundColor = .blue
 
     }
 
